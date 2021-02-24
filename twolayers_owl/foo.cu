@@ -9,6 +9,7 @@ __global__ void testKernel() {
 int main(){
 	OWLContext owlContext = owlContextCreate(nullptr, 1);
 	testKernel<<<1,1>>>();
+	cudaDeviceSynchronize();
 	owlContextDestroy(owlContext);
 	std::cout << "foo done!\n";
 	return 0;
