@@ -9,6 +9,8 @@ cmake_policy(SET CMP0091 NEW)
 
 project(foo LANGUAGES CXX CUDA)
 
+set(CMAKE_CUDA_ARCHITECTURES 86)
+
 # OptiX && owl
 set(ENV{OptiX_INSTALL_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/../optix_7_2_0")
 set(OWL_BUILD_SAMPLES OFF CACHE BOOL "Disable OWL samples" FORCE)
@@ -16,8 +18,6 @@ set(OWL_BUILD_ADVANCED_TESTS OFF CACHE BOOL "Disable OWL advanced tests" FORCE)
 set(OWL_USE_TBB OFF CACHE BOOL "Disable Intel TBB in OWL" FORCE)
 add_subdirectory(../owl owl)
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/../owl/owl/include" "${OWL_INCLUDES}")
-
-set(CMAKE_CUDA_ARCHITECTURES 86)
 
 add_executable(foo foo.cu)
 target_link_libraries(foo PRIVATE owl_static)
